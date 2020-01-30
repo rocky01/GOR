@@ -6,8 +6,8 @@ GOD is header only library which providing simple macro for handling exceptional
 
 ## Requirements
 
-c++14 or higher
-gcc >= 9.1
+c++14 or higher\
+gcc >= 9.1\
 clang >= 6.0.0
 
 ## Building and test running
