@@ -7,6 +7,7 @@ GOD is header only library which providing simple macro for handling exceptional
 ## Building and test running
 ```bash
 mkdir bin
+cd bin
 cmake ...
 make
 ctest -VV
