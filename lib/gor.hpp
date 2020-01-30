@@ -45,16 +45,16 @@ struct CastableToReturnType
 };
 
 template<bool>
-auto returnVal();
+constexpr auto returnVal();
 
 template<>
-auto returnVal<true>()
+inline constexpr auto returnVal<true>()
 {
     return void();
 }
 
 template<>
-auto returnVal<false>()
+inline constexpr auto returnVal<false>()
 {
     return CastableToReturnType{};
 }

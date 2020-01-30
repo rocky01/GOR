@@ -13,7 +13,7 @@ std::unique_ptr<int> getVal(std::unique_ptr<int> val)
     return val;
 }
 
-std::unique_ptr<int> tryGetVal(
+std::unique_ptr<int> doSomething(
     std::unique_ptr<int> valueToGet,
     std::unique_ptr<int> valueToReturn)
 {
@@ -29,7 +29,7 @@ std::shared_ptr<int> getVal(std::shared_ptr<int> val)
     return val;
 }
 
-std::shared_ptr<int> tryGetVal(
+std::shared_ptr<int> doSomething(
     std::shared_ptr<int> valueToGet,
     std::shared_ptr<int> valueToReturn)
 {
@@ -45,7 +45,7 @@ const char* getVal(const char* val)
     return val;
 }
 
-const int* tryGetVal(
+const int* doSomething(
     const char* valueToGet,
     const int* valueToReturn)
 {
@@ -62,7 +62,7 @@ std::optional<char> getVal(std::optional<char> val)
     return val;
 }
 
-std::optional<int> tryGetVal(
+std::optional<int> doSomething(
     std::optional<char> valueToGet,
     std::optional<int> valueToReturn)
 {
@@ -78,7 +78,7 @@ bool getVal(bool val)
     return val;
 }
 
-const char* tryGetVal(
+const char* doSomething(
     bool valueToGet,
     const char* valueToReturn)
 {
@@ -113,7 +113,7 @@ TEST(Test, UniquePtrNull)
     std::unique_ptr<int> valueToGet = nullptr;
     std::unique_ptr<int> valueToReturn = std::make_unique<int>(5);
 
-    auto result = tryGetVal(std::move(valueToGet), std::move(valueToReturn));
+    auto result = doSomething(std::move(valueToGet), std::move(valueToReturn));
 
     ASSERT_TRUE(result == nullptr);
 }
@@ -123,7 +123,7 @@ TEST(Test, UniquePtrNotNull)
     std::unique_ptr<int> valueToGet = std::make_unique<int>(10);
     std::unique_ptr<int> valueToReturn = std::make_unique<int>(5);
 
-    auto result = tryGetVal(std::move(valueToGet), std::move(valueToReturn));
+    auto result = doSomething(std::move(valueToGet), std::move(valueToReturn));
 
     ASSERT_TRUE(*result == 5);
 }
@@ -135,7 +135,7 @@ TEST(Test, SharedPtrNull)
     std::shared_ptr<int> valueToGet = nullptr;
     std::shared_ptr<int> valueToReturn = std::make_shared<int>(52);
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(result == nullptr);
 }
@@ -145,7 +145,7 @@ TEST(Test, SharedPtrNotNull)
     std::shared_ptr<int> valueToGet = std::make_shared<int>(101);
     std::shared_ptr<int> valueToReturn = std::make_shared<int>(52);
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(*result == 52);
 }
@@ -157,7 +157,7 @@ TEST(Test, GetRowPointerNull)
     const char* valueToGet = nullptr;
     const int* valueToReturn = new int(1234);
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(result == nullptr);
 }
@@ -167,7 +167,7 @@ TEST(Test, GetRowPointerNotNull)
     const char* valueToGet = new char('w');
     const int* valueToReturn = new int(1234);
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(*result == 1234);
 }
@@ -180,7 +180,7 @@ TEST(Test, GetOptionalNull)
     std::optional<char> valueToGet = std::nullopt;
     std::optional<int> valueToReturn = 4321;
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(result == std::nullopt);
 }
@@ -190,7 +190,7 @@ TEST(Test, GetOptionalNotNull)
     std::optional<char> valueToGet = 'e';
     std::optional<int> valueToReturn = 4321;
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(result == 4321);
 }
@@ -203,7 +203,7 @@ TEST(Test, GetRowPtrNull_Bool)
     bool valueToGet = false;
     const char* valueToReturn = new char('S');
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(result == nullptr);
 }
@@ -213,7 +213,7 @@ TEST(Test, GetRowPtrNotNull_Bool)
     bool valueToGet = true;
     const char* valueToReturn = new char('S');
 
-    auto result = tryGetVal(valueToGet, valueToReturn);
+    auto result = doSomething(valueToGet, valueToReturn);
 
     ASSERT_TRUE(*result == 'S');
 }
