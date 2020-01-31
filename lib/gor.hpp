@@ -1,7 +1,6 @@
 #ifndef GOR_HPP_
 #define GOR_HPP_
 
-#include <cstring>
 #include <iostream>
 #include <memory>
 
@@ -68,7 +67,7 @@ inline constexpr auto returnVal<false>()
         if (!result)                                                                                                  \
         {                                                                                                             \
             std::cerr << __FILE__ << ":" << __LINE__ << " TRY: " << #expression << " return null." << std::endl;      \
-            constexpr bool is_void = memcmp(__PRETTY_FUNCTION__, "void ", 5) == 0;                                    \
+            constexpr bool is_void = __builtin_memcmp(__PRETTY_FUNCTION__, "void ", 5) == 0;                                    \
             return gor::internal::returnVal<is_void>();                                                               \
         }                                                                                                             \
         std::move(result);                                                                                            \
